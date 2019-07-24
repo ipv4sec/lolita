@@ -10,7 +10,7 @@ let app: express.Application = express();
 
 app.get('/', function (req, res) {
   console.log(service)
-  request.get(service, function(err, httpResponse, body){
+  request.get("http://" + service, function(err, httpResponse, body){
     res.json({
       "language": "nodejs",
       "serverId": serverId,
