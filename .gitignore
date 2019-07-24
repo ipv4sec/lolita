@@ -1,0 +1,9 @@
+
+go/application
+
+
+node/.idea/
+node/dist/
+node/node_modules
+
+.idea/

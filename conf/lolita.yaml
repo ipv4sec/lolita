@@ -1,0 +1,126 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: go
+  name: lolita-go
+  namespace: lolita
+spec:
+  selector:
+    matchLabels:
+      app: go
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: go
+    spec:
+      containers:
+      - image: ipv4sec/go:v1
+        name: go
+        ports:
+        - containerPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: node
+  name: lolita-node
+  namespace: lolita
+spec:
+  selector:
+    matchLabels:
+      app: node
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: node
+    spec:
+      containers:
+      - env:
+        - name: GO_SERVICE_URL
+          value: lolita-go
+        image: ipv4sec/node:v1
+        name: node
+        ports:
+        - containerPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: php
+  name: lolita-php
+  namespace: lolita
+spec:
+  selector:
+    matchLabels:
+      app: php
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: php
+    spec:
+      containers:
+      - env:
+        - name: NODE_SERVICE_URL
+          value: lolita-node
+        image: ipv4sec/php:v1
+        name: php
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: go
+  name: lolita-go
+  namespace: lolita
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      name: http
+      targetPort: 3000
+  selector:
+    app: go
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: node
+  name: lolita-node
+  namespace: lolita
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      name: http
+      targetPort: 3000
+  selector:
+    app: node
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: php
+  name: lolita-php
+  namespace: lolita
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      name: http
+      targetPort: 3000
+  selector:
+    app: php
+  type: NodePort
