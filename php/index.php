@@ -5,9 +5,8 @@
    }
    $e = new Language();
    $e->language = "php";
-   $NODE_SERVICE_URL = getenv("NODE_SERVICE_URL");
 
-   $url = !empty($NODE_SERVICE_URL)  ? $NODE_SERVICE_URL : "http://httpbin.org/get?language=php";
+   $url = "http://nodejs.cn";
    $ch = curl_init();
    $timeout = 5;
    curl_setopt($ch, CURLOPT_URL, $url);

@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   labels:
     app: go
-  name: lolita-go
+  name: lolita-go-deployment
   namespace: lolita
 spec:
   selector:
@@ -17,7 +17,7 @@ spec:
         app: go
     spec:
       containers:
-      - image: ipv4sec/go:v1
+      - image: ipv4sec/go:v3
         name: go
         ports:
         - containerPort: 3000
@@ -27,7 +27,7 @@ kind: Deployment
 metadata:
   labels:
     app: node
-  name: lolita-node
+  name: lolita-node-deployment
   namespace: lolita
 spec:
   selector:
@@ -40,10 +40,7 @@ spec:
         app: node
     spec:
       containers:
-      - env:
-        - name: GO_SERVICE_URL
-          value: lolita-go
-        image: ipv4sec/node:v1
+      - image: ipv4sec/node:v3
         name: node
         ports:
         - containerPort: 3000
@@ -53,7 +50,7 @@ kind: Deployment
 metadata:
   labels:
     app: php
-  name: lolita-php
+  name: lolita-php-deployment
   namespace: lolita
 spec:
   selector:
@@ -66,10 +63,7 @@ spec:
         app: php
     spec:
       containers:
-      - env:
-        - name: NODE_SERVICE_URL
-          value: lolita-node
-        image: ipv4sec/php:v1
+      - image: ipv4sec/php:v3
         name: php
         ports:
         - containerPort: 3000
@@ -79,7 +73,7 @@ kind: Service
 metadata:
   labels:
     app: go
-  name: lolita-go
+  name: golang.google.cn
   namespace: lolita
 spec:
   ports:
@@ -96,7 +90,7 @@ kind: Service
 metadata:
   labels:
     app: node
-  name: lolita-node
+  name: nodejs.cn
   namespace: lolita
 spec:
   ports:
@@ -113,7 +107,7 @@ kind: Service
 metadata:
   labels:
     app: php
-  name: lolita-php
+  name: www.php.net
   namespace: lolita
 spec:
   ports:
