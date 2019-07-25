@@ -8,5 +8,5 @@ RUN go build -o application cmd.go
 
 EXPOSE 3000
 
-ENTRYPOINT ./application
+ENTRYPOINT /bin/sh -c /data/run.sh
 
