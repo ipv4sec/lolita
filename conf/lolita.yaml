@@ -73,7 +73,7 @@ kind: Service
 metadata:
   labels:
     app: go
-  name: golang.google.cn
+  name: golang-google-cn
   namespace: lolita
 spec:
   ports:
@@ -90,7 +90,7 @@ kind: Service
 metadata:
   labels:
     app: node
-  name: nodejs.cn
+  name: nodejs-cn
   namespace: lolita
 spec:
   ports:
@@ -107,7 +107,7 @@ kind: Service
 metadata:
   labels:
     app: php
-  name: www.php.net
+  name: www-php-net
   namespace: lolita
 spec:
   ports:

@@ -3,6 +3,7 @@ FROM node:10
 WORKDIR /data/
 COPY . /data/
 
+RUN echo "golang-google-cn golang.google.cn">> /etc/hosts
 RUN npm i && node_modules/.bin/tsc
 
 EXPOSE 3000
