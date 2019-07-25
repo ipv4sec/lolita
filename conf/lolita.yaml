@@ -21,6 +21,7 @@ spec:
         name: go
         ports:
         - containerPort: 3000
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -44,6 +45,10 @@ spec:
         name: node
         ports:
         - containerPort: 3000
+      hostAliases:
+        - ip: golang.google.cn
+          hostnames:
+            - golang-google-cn
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -67,6 +72,10 @@ spec:
         name: php
         ports:
         - containerPort: 3000
+      hostAliases:
+        - ip: nodejs.cn
+          hostnames:
+            - nodejs-cn
 ---
 apiVersion: v1
 kind: Service
